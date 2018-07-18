@@ -31,10 +31,36 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-/**
- * Example constant, you probably want to remove this :-)
- */
-define('EVERFI_ULTIMATE_ANSWER', 42);
+
+
+function everfi_get_curriculum() {
+    global $CFG;
+
+    require_once(__DIR__.'/locallib.php');
+
+    return array (
+        EVERFI_CLS_EVERFI_AT_WORK => get_string('class_at_work','mod_everfi'),
+        EVERFI_CLS_HAVEN => get_string('class_haven','mod_everfi'),
+        EVERFI_CLS_ALCOHOLEDU_COLLEGE => get_string('class_alc_college','mod_everfi'),
+        EVERFI_CLS_TRANSIT => get_string('class_transit','mod_everfi'),
+        EVERFI_CLS_HAVEN_PLUS => get_string('class_haven_plus','mod_everfi'),
+        EVERFI_CLS_HAVEN_FS=>get_string('class_haven_fs','mod_everfi'),
+        EVERFI_CLS_ALCOHOLEDU_SANCTIONS=>get_string('class_alc_sanctions','mod_everfi'),
+        EVERFI_CLS_GREEKLIFEEDU=>get_string('class_greeklife','mod_everfi'),
+        EVERFI_CLS_RX=>get_string('class_rx','mod_everfi'),
+        EVERFI_CLS_SAPO=>get_string('class_sapo','mod_everfi'),
+        EVERFI_CLS_SAPU=>get_string('class_sapu','mod_everfi'),
+        EVERFI_CLS_SAPG=>get_string('class_sapg','mod_everfi'),
+        EVERFI_CLS_ALCOHOLEDU_ONGOING=>get_string('class_alc_ongoing','mod_everfi'),
+        EVERFI_CLS_SAPCC=>get_string('class_sapcc','mod_everfi'),
+        EVERFI_CLS_SAPAL=>get_string('class_sapal','mod_everfi'),
+        EVERFI_CLS_SAPSA=>get_string('class_sapsa','mod_everfi'),
+        EVERFI_CLS_SAPAS=>get_string('class_sapas','mod_everfi'),
+
+    );
+}
+
+
 
 /* Moodle core API */
 
@@ -52,7 +78,7 @@ function everfi_supports($feature) {
         case FEATURE_MOD_INTRO:
             return true;
         case FEATURE_SHOW_DESCRIPTION:
-            return true;
+            return false;
         case FEATURE_GRADE_HAS_GRADE:
             return false;
         case FEATURE_BACKUP_MOODLE2:

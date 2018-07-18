@@ -26,6 +26,32 @@ defined('MOODLE_INTERNAL') || die;
 
 if ($ADMIN->fulltree) {
     require_once(__DIR__ . '/lib.php');
+    $settings->add(new admin_setting_configtext('everfi/schoolid',
+        get_string('settingschoolid','mod_everfi'),
+        get_string('settingschoolid_desc','mod_everfi'),
+        '000000',PARAM_INT));
+    $settings->add(new admin_setting_configtext('everfi/apitoken',
+        get_string('settingsapitoken','mod_everfi'),
+        get_string('settingsapitoken_desc','mod_everfi'),
+        'None'));
+    $settings->add(new admin_setting_configtext('everfi/serverurl',
+        get_string('settingsserverurl','mod_everfi'),
+        get_string('settingsserverurl_desc','mod_everfi'),
+        "https://platform.everfi.com/sso",PARAM_URL));
+
+    $curriculum = everfi_get_curriculum();
+
+    $settings->add(new admin_setting_configmultiselect('everfi/curriculum_id',
+        get_string('settingscurriculum_id','mod_everfi'),
+        get_string('settingscurriculum_desc','mod_everfi'),
+        null,$curriculum));
+
+
+
+
+
+
+
 
 
 }

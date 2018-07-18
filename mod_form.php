@@ -35,7 +35,11 @@ require_once($CFG->dirroot.'/course/moodleform_mod.php');
  * @package    mod_everfi
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
  */
+$PAGE->requires->jquery();
+$PAGE->requires->js('/mod/everfi/createinstance.js',true);
+
 class mod_everfi_mod_form extends moodleform_mod {
 
     /**
@@ -59,6 +63,7 @@ class mod_everfi_mod_form extends moodleform_mod {
         $mform->addRule('name', null, 'required', null, 'client');
         $mform->addRule('name', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
         $mform->addHelpButton('name', 'everfiname', 'everfi');
+        $mform->setConstant('name','EverFi');
 
         // Adding the standard "intro" and "introformat" fields.
         if ($CFG->branch >= 29) {
@@ -67,15 +72,9 @@ class mod_everfi_mod_form extends moodleform_mod {
             $this->add_intro_editor();
         }
 
-        // Adding the rest of everfi settings, spreading all them into this fieldset
-        // ... or adding more fieldsets ('header' elements) if needed for better logic.
-        $mform->addElement('static', 'label1', 'everfisetting1', 'Your everfi fields go here. Replace me!');
-
-        $mform->addElement('header', 'everfifieldset', get_string('everfifieldset', 'everfi'));
-        $mform->addElement('static', 'label2', 'everfisetting2', 'Your everfi fields go here. Replace me!');
 
         // Add standard grading elements.
-        $this->standard_grading_coursemodule_elements();
+       // $this->standard_grading_coursemodule_elements();
 
         // Add standard elements, common to all modules.
         $this->standard_coursemodule_elements();

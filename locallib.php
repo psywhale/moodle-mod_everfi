@@ -36,3 +36,21 @@ defined('MOODLE_INTERNAL') || die();
  *    return new stdClass();
  *}
  */
+
+define('EVERFI_CLS_EVERFI_AT_WORK', 2);
+define('EVERFI_CLS_HAVEN',8);
+define('EVERFI_CLS_ALCOHOLEDU_COLLEGE',10);
+define('EVERFI_CLS_TRANSIT',11);
+define('EVERFI_CLS_HAVEN_PLUS',20);
+define('EVERFI_CLS_HAVEN_FS',21);
+define('EVERFI_CLS_ALCOHOLEDU_SANCTIONS',22);
+define('EVERFI_CLS_GREEKLIFEEDU',23);
+define('EVERFI_CLS_RX',31);
+define('EVERFI_CLS_SAPO',32);
+define('EVERFI_CLS_SAPU',33);
+define('EVERFI_CLS_SAPG',34);
+define('EVERFI_CLS_ALCOHOLEDU_ONGOING',35);
+define('EVERFI_CLS_SAPCC',36);
+define('EVERFI_CLS_SAPAL',37);
+define('EVERFI_CLS_SAPSA',44);
+define('EVERFI_CLS_SAPAS',45);

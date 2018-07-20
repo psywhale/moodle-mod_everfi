@@ -29,15 +29,15 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configtext('everfi/schoolid',
         get_string('settingschoolid','mod_everfi'),
         get_string('settingschoolid_desc','mod_everfi'),
-        '000000',PARAM_INT));
+        '11597',PARAM_INT));
     $settings->add(new admin_setting_configtext('everfi/apitoken',
         get_string('settingsapitoken','mod_everfi'),
         get_string('settingsapitoken_desc','mod_everfi'),
-        'None'));
+        '93b65e1576b01356a90d'));
     $settings->add(new admin_setting_configtext('everfi/serverurl',
         get_string('settingsserverurl','mod_everfi'),
         get_string('settingsserverurl_desc','mod_everfi'),
-        "https://platform.everfi.com/sso",PARAM_URL));
+        "https://platform.deverfi.com/sso",PARAM_URL));
 
     $curriculum = everfi_get_curriculum();
 

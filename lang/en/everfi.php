@@ -47,10 +47,11 @@ The default value of 11597 is the development Everfi School ID ';
 $string['settingsapitoken'] = "Api Token";
 $string['settingsapitoken_desc'] = "Api Token provided by EverFi
 The Default is for the development account";
-$string['settingsserverurl'] = "Server Address";
-$string['settingsserverurl_desc'] = "EverFi SSO Server Url
-platform.deverfi.com is the development server. 
-https://platform.everfi.com is for production";
+$string['settingsserverurl'] = "Server Address
+
+platform.deverfi.net is the development server. 
+
+https://platform.everfi.net is for production";
 $string['settingscurriculum_id'] = "EverFi Classes";
 $string['settingscurriculum_desc'] = "EverFi Classes to Enrol";
 

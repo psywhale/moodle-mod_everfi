@@ -68,6 +68,32 @@ $PAGE->set_heading(format_string($course->fullname));
  * $PAGE->add_body_class('everfi-'.$somevar);
  */
 
+
+
+$everfi_config = get_config('everfi');
+
+$post = [
+    'api_token' => $everfi_config->apitoken,
+    'student_id' => $USER->idnumber,
+    'school_id'   => $everfi_config->schoolid,
+    'curriculum_id' => $everfi_config->curriculum_id,
+];
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $everfi_config->serverurl);
+
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+$response = curl_exec($ch);
+
+if (curl_error($ch)) {
+    echo 'Curl Error:' . curl_error($ch);
+}
+
+var_export($response);
+
+/*
+
 // Output starts here.
 echo $OUTPUT->header();
 
@@ -77,7 +103,8 @@ if ($everfi->intro) {
 }
 
 // Replace the following lines with you own code.
-echo $OUTPUT->heading('Yay! It works!');
+echo $OUTPUT->heading('Yay! It works!'.$response);
 
 // Finish the page.
 echo $OUTPUT->footer();
+*/

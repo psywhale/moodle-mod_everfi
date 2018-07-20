@@ -37,7 +37,7 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configtext('everfi/serverurl',
         get_string('settingsserverurl','mod_everfi'),
         get_string('settingsserverurl_desc','mod_everfi'),
-        "https://platform.deverfi.com/sso",PARAM_URL));
+        "https://platform.deverfi.net/sso",PARAM_URL));
 
     $curriculum = everfi_get_curriculum();
 

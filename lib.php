@@ -61,6 +61,20 @@ function everfi_get_curriculum() {
 }
 
 
+/**
+ * Makes sure to open in new window!!
+ * @param $coursemodule
+ * @return cached_cm_info
+ */
+function everfi_get_coursemodule_info($coursemodule){
+    global $CFG;
+    $info = new cached_cm_info();
+    $fullurl = "$CFG->wwwroot/mod/everfi/view.php?id=$coursemodule->id&amp;redirect=1";
+    $info->onclick = "window.open('$fullurl'); return false;";
+    return $info;
+
+
+}
 
 /* Moodle core API */
 

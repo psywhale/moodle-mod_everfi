@@ -42,7 +42,7 @@ if ($id) {
     $course     = $DB->get_record('course', array('id' => $everfi->course), '*', MUST_EXIST);
     $cm         = get_coursemodule_from_instance('everfi', $everfi->id, $course->id, false, MUST_EXIST);
 } else {
-    error('You must specify a course_module ID or an instance ID');
+    notice('You must specify a course_module ID or an instance ID');
 }
 
 require_login($course, true, $cm);
@@ -63,48 +63,69 @@ $PAGE->set_heading(format_string($course->fullname));
 
 /*
  * Other things you may want to set - remove if not needed.
- * $PAGE->set_cacheable(false);
+ *
  * $PAGE->set_focuscontrol('some-html-id');
  * $PAGE->add_body_class('everfi-'.$somevar);
  */
-
+$PAGE->set_cacheable(false);
 
 
 $everfi_config = get_config('everfi');
 
 $post = [
     'api_token' => $everfi_config->apitoken,
-    'student_id' => $USER->idnumber,
     'school_id'   => $everfi_config->schoolid,
+    'student_id' => $USER->idnumber,
     'curriculum_id' => $everfi_config->curriculum_id,
+    'last_name' => $USER->lastname,
+    'first_name' => $USER->firstname,
+    'email_address' => $USER->email,
 ];
+
+
+
+//var_export(http_build_query($post));
+//$curlerror = fopen('/tmp/curly',"w+");
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $everfi_config->serverurl);
 
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
-curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS,$post);
+curl_setopt($ch, CURLOPT_VERBOSE, true);
+//curl_setopt($ch,CURLOPT_STDERR, $curlerror);
+//curl_setopt($ch,CURLOPT_WRITEHEADER,$curlerror);
+//curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+
 $response = curl_exec($ch);
 
 if (curl_error($ch)) {
     echo 'Curl Error:' . curl_error($ch);
 }
+//fclose($curlerror);
 
-var_export($response);
-
-/*
-
-// Output starts here.
-echo $OUTPUT->header();
-
-// Conditions to show the intro can change to look for own settings or whatever.
-if ($everfi->intro) {
-    echo $OUTPUT->box(format_module_intro('everfi', $everfi, $cm->id), 'generalbox mod_introbox', 'everfiintro');
+if(preg_match("/sso_token/",$response)) {
+    header("Location: $response");
 }
+else {
+    //var_export($response);
 
-// Replace the following lines with you own code.
-echo $OUTPUT->heading('Yay! It works!'.$response);
 
-// Finish the page.
-echo $OUTPUT->footer();
-*/
+
+
+    // Output starts here.
+    echo $OUTPUT->header();
+
+    // Conditions to show the intro can change to look for own settings or whatever.
+    if ($everfi->intro) {
+        echo $OUTPUT->box(format_module_intro('everfi', $everfi, $cm->id), 'generalbox mod_introbox', 'everfiintro');
+    }
+
+    // Replace the following lines with you own code.
+    echo $OUTPUT->heading('Oh no!');
+    echo $OUTPUT->notification("Errors from server as follows:<br/>".$response,3);
+
+    // Finish the page.
+    echo $OUTPUT->footer();
+
+}
